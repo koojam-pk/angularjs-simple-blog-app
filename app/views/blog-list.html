@@ -1,0 +1,47 @@
+<div class="row">
+    <div class="col-12 mx-auto">
+        <h1 ng-hide="searchQuery" class="text-center">Blog List</h1>
+        <h1 ng-show="searchQuery" class="text-center">Resuls for {{query}}</h1>
+        <div class="row pb-2">
+            <div class="col-12 col-md-6 pb-2">
+                <input type="text" ng-model="query" class="form-control" placeholder="Filter">
+            </div>
+            <div class="col-12 col-md-6 pb-2">
+                <select class="form-control" ng-model="order">
+                    <option value="-publishDate">Recent</option>
+                    <option value="publishDate">Older</option>
+                    <option value="title">A-Z</option>
+                    <option value="-title">Z-A</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="row w-100 mx-auto">
+        <div class="col-md-2 d-none"></div>
+        <div class="col-12 col-md-8 ml-0 pl-md-3">
+            <dir-pagination-controls ng-hide="query.length>0" pagination-id="sub-content"></dir-pagination-controls>
+        </div>
+    </div>
+    <div class="row text-center">
+        <div class="col-12 col-sm-12" dir-paginate="item in items | orderBy: order | filter: query | itemsPerPage: 5 as postItems" pagination_id="sub-content">
+            <div class="thumbnail">
+                <a ng-href="/blog/{{ item.id }}" ng-if="item.image">
+                    <img class="img-fluid pl-3 pr-3 pb-2" ng-src="{{ item.image }}" alt="">
+                </a>
+                <div class="caption">
+                    <h3><a ng-href="/blog/{{ item.id }}">{{ item.title }}</a></h3>
+                    <p>{{ item.text }} {{ item.publishDate }}</p>
+                    <p><a ng-href="/blog/{{ item.id }}" class="btn btn-primary">View</a></p>
+                </div>
+            </div>
+        </div>
+        <span ng-if="items.length == 0">Posts coming soon</span>
+    </div>
+
+    <div class="row w-100 mx-auto">
+        <div class="col-md-2 d-none"></div>
+        <div class="col-12 col-md-8 ml-0 pl-md-3">
+            <dir-pagination-controls ng-hide="query.length>0" pagination-id="sub-content"></dir-pagination-controls>
+        </div>
+    </div>
+</div>

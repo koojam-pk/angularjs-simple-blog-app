@@ -1,0 +1,58 @@
+<div class="row">
+    <div class="col-sm-8 mx-auto">
+        <div class="page-header">
+            <h1>{{ post.title }} <small>{{ post.publishDate }}</small></h1>
+        </div>
+        <span ng-if="post.image">
+            <img ng-src="{{ post.image }}" class="img-fluid">
+            <br />
+        </span>
+        <p>{{ post.description }}</p>
+        <hr />
+        <h3>Comments</h3>
+        <div class="row" ng-show="comments.length>0">
+            <div class="col-sm-6">
+                <input class="form-control" type="text" ng-model="query" placeholder="Filter Comments">
+                <br />
+            </div>
+        </div>
+        <ul ng-show="comments.length>0">
+            <li ng-repeat="comment in comments | filter: query">
+                {{ comment.text }} <a class="btn btn-sm btn-default delete-icon"
+                ng-click="confirmDialog(comment)">
+                <i class="fa fa-trash pb-2" aria-hidden="true"></i></a>
+            </li>
+        </ul>
+        <hr />
+        <div class="row">
+            <div class="col-sm-6">
+                <p style="color:red" ng-if="reply.text">Preview: {{ reply.text }}</p>
+                <form ng-submit="addReply()">
+                    <input type="hidden" ng-model="reply.id">
+                    <textarea class="form-control" ng-model="reply.text"></textarea>
+                    <button class="btn btn-primary mt-2" type="submit">Submit</button>
+                    <button class="btn btn-secondary mt-2" type="button" ng-click="back()">Back</button>
+                </form>
+            </div>
+        </div>
+        <div class="modal" id="confirmDialog">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Delete Comment</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <p>Are your sure?</p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" ng-click="cancelDialog()">Cancel</button>
+                <button type="button" class="btn btn-danger" ng-click="deleteComment()">Confirm</button>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+</div>
