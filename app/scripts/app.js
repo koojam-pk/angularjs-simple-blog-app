@@ -21,7 +21,7 @@ angular
     'clickOutside'
   ])
   .config(function ($routeProvider, $locationProvider) {
-    $locationProvider.html5Mode({enabled:true});
+    $locationProvider.html5Mode({enabled: true});
     $routeProvider
       .when('/', {
         template: '<blog-list></blog-list>'
@@ -33,9 +33,9 @@ angular
         template: '<blog-detail></blog-detail>'
       })
       .when('/about', {
-        templateUrl: 'views/about.html',
+        templateUrl: 'views/about.html' /*,
         controller: 'AboutCtrl',
-        controllerAs: 'about'
+        controllerAs: 'about'*/
       })
       .otherwise({
         redirectTo: '/'
