@@ -10,11 +10,11 @@
  */
 angular
   .module('simpleBlogApp', [
-    'ui.bootstrap',
     'ngCookies',
     'ngResource',
     'ngRoute',
     'angularUtils.directives.dirPagination',
+    'ui.bootstrap',
     'kjNav',
     'blogDetail',
     'blogList',
