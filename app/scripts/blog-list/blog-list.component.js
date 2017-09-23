@@ -3,7 +3,8 @@
 angular.module('blogList')
     .component('blogList', {
         templateUrl: 'views/blog-list.html',
-        controller: function(Post, $location, $routeParams, $rootScope, $scope) {
+        controller: ['Post', '$location', '$routeParams', '$rootScope', '$scope',
+            function(Post, $location, $routeParams, $rootScope, $scope) {
             var q = $location.search().q;
             if (q) {
                 $scope.query = q;
@@ -15,7 +16,7 @@ angular.module('blogList')
                 $rootScope.$apply(function() {
                     $location.path('/blog/' + post.id);
                 });
-            }
+            };
             $scope.changeCols = function(number) {
                 if (angular.isNumber(number)) {
                     $scope.numCols = number;
@@ -30,7 +31,7 @@ angular.module('blogList')
                 if ($scope.query) {
                     $scope.loadingQuery = true;
                     $scope.cssClass = 'col-md-12';
-                    if ($scope.query != q) {
+                    if ($scope.query !== q) {
                         $scope.searchQuery = false;
                     }
                 } else {
@@ -42,8 +43,6 @@ angular.module('blogList')
             });
             Post.query(function(data) {
                 setupCols(data, 2);
-            }, function(error) {
-
             });
             function setupCols(data, number) {
                 if (angular.isNumber(number)) {
@@ -52,7 +51,7 @@ angular.module('blogList')
                     $scope.numCols = 2;
                 }
                 $scope.cssClass =  'col-sm-' + (12/$scope.numCols);
-                $scope.items = data
+                $scope.items = data;
                 $scope.colItems = chunkArrayInGroups(data, $scope.numCols);
             }
             function chunkArrayInGroups(array, unit) {
@@ -63,5 +62,5 @@ angular.module('blogList')
                 }
                 return results;
             }
-        }
+        }]
     });

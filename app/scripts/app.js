@@ -29,7 +29,7 @@ angular
       .when('/blog', {
         template: '<blog-list></blog-list>'
       })
-      .when("/blog/:id", {
+      .when('/blog/:id', {
         template: '<blog-detail></blog-detail>'
       })
       .when('/about', {
