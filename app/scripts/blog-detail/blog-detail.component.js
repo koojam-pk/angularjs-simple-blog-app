@@ -12,6 +12,7 @@ angular.module('blogDetail').
                     if (parseInt(post.id) === parseInt($routeParams.id)) {
                         $scope.post = post;
                         $scope.notFound = false;
+
                         if (post.comments) {
                             $scope.comments = post.comments;
                         }
@@ -49,5 +50,9 @@ angular.module('blogDetail').
             function resetReply() {
                 $scope.reply = { 'id': $scope.comments.length+1, 'text': '' };
             }
+            // Prevent empty post after render the page
+            $scope.isHide = function() {
+              return ($scope.post === undefined);
+            };
         }]
     });

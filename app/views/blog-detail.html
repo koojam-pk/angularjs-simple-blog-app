@@ -1,17 +1,18 @@
-<div class="row">
-    <div class="col-sm-8 mx-auto">
+<div class="row" ng-hide="isHide()">
+    <div class="col-sm-8 mx-auto w-100">
         <div class="page-header">
-            <h1>{{ post.title }} <small>{{ post.publishDate }}</small></h1>
+            <h1>{{ post.title }}</h1>
+            <h2><small>{{ post.publishDate }}</small></h2>
         </div>
         <span ng-if="post.image">
-            <img ng-src="{{ post.image }}" class="img-fluid">
+            <img ng-src="{{ post.image }}" class="img-fluid" alt="{{ post.imageby }}">
             <br />
         </span>
-        <p>{{ post.description }}</p>
+        <p class="pt-2">{{ post.description }}</p>
         <hr />
-        <h3>Comments</h3>
-        <div class="row" ng-show="comments.length>0">
-            <div class="col-sm-6">
+        <h3 class="w-100 ml-3">Comments</h3>
+        <div class="row w-100 ml-2" ng-show="comments.length>0">
+            <div class="col">
                 <input class="form-control" type="text" ng-model="query" placeholder="Filter Comments">
                 <br />
             </div>
@@ -24,10 +25,10 @@
             </li>
         </ul>
         <hr />
-        <div class="row">
-            <div class="col-sm-6">
+        <div class="row w-100 ml-1">
+            <div class="col">
                 <p style="color:red" ng-if="reply.text">Preview: {{ reply.text }}</p>
-                <form ng-submit="addReply()">
+                <form ng-submit="addReply(reply)">
                     <input type="hidden" ng-model="reply.id">
                     <textarea class="form-control" ng-model="reply.text"></textarea>
                     <button class="btn btn-primary mt-2" type="submit">Submit</button>
