@@ -5,4 +5,15 @@ var app = express();
 
 app.use(morgan('dev'));
 app.use(gzippo.staticGzip("" + __dirname + "/dist"));
-app.listen(process.env.PORT || 5000);
+
+app.get('*', (req, res) => {
+  res.writeHead(301, {
+    Location: "http" + (req.socket.encrypted ? "s" : "") + "://" + req.headers.host + '/#' + req.url
+  });
+  res.end();
+});
+
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, function() {
+  console.log('Server is running on ' + PORT)
+});

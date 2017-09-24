@@ -20,8 +20,12 @@ angular
     'blogList',
     'clickOutside'
   ])
-  .config(function ($routeProvider, $locationProvider) {
-    $locationProvider.html5Mode({enabled: true});
+  .config(['$routeProvider', '$locationProvider',
+    function ($routeProvider, $locationProvider) {
+    //$locationProvider.html5Mode({enabled: true}).hashPrefix('');
+    //if(window.history && window.history.pushState){
+      $locationProvider.html5Mode({enabled: true, requireBase: false}).hashPrefix('');
+    //}
     $routeProvider
       .when('/', {
         template: '<blog-list></blog-list>'
@@ -33,11 +37,9 @@ angular
         template: '<blog-detail></blog-detail>'
       })
       .when('/about', {
-        templateUrl: 'views/about.html' /*,
-        controller: 'AboutCtrl',
-        controllerAs: 'about'*/
+        templateUrl: 'views/about.html',
       })
       .otherwise({
         redirectTo: '/'
       });
-  });
+  }]);

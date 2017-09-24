@@ -4,7 +4,7 @@ angular.module('blogList')
     .component('blogList', {
         templateUrl: 'views/blog-list.html',
         controller: ['Post', '$location', '$routeParams', '$rootScope', '$scope',
-            function(Post, $location, $routeParams, $rootScope, $scope) {
+          function(Post, $location, $routeParams, $rootScope, $scope) {
             var q = $location.search().q;
             if (q) {
                 $scope.query = q;

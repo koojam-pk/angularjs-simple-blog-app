@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('post')
-    .factory('Post', function($resource) {
+    .factory('Post', ['$resource', function($resource) {
         var url = 'https://thundering-factory.glitch.me/api/blogdata';
         return $resource(url, {}, {
            query: {
@@ -22,4 +22,4 @@ angular.module('post')
                 cache: true
             }
         });
-    });
+    }]);

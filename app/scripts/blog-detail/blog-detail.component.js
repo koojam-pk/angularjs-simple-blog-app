@@ -3,13 +3,13 @@
 angular.module('blogDetail').
     component('blogDetail', {
         templateUrl: 'views/blog-detail.html',
-        controller: [ 'Post', '$http', '$location', '$routeParams', '$scope', '$document',
-            function(Post, $http, $location, $routeParams, $scope, $document) {
+        controller: ['Post', '$http', '$location', '$routeParams', '$scope', '$document',
+          function(Post, $http, $location, $routeParams, $scope, $document) {
             Post.query(function(data){
                 $scope.notFound = true;
                 $scope.comments = [];
                 angular.forEach(data, function(post) {
-                    if (post.id === $routeParams.id) {
+                    if (parseInt(post.id) === parseInt($routeParams.id)) {
                         $scope.post = post;
                         $scope.notFound = false;
                         if (post.comments) {
@@ -18,8 +18,10 @@ angular.module('blogDetail').
                         resetReply();
                     }
                 });
+                if ($scope.notFound) {
+                  $location.path('/');
+                }
             });
-
             $scope.addReply = function(reply) {
                 $scope.comments.push(reply);
                 resetReply();
@@ -46,10 +48,6 @@ angular.module('blogDetail').
             };
             function resetReply() {
                 $scope.reply = { 'id': $scope.comments.length+1, 'text': '' };
-            }
-            if ($scope.notFound) {
-                console.log('Not found');
-                $location.path('/');
             }
         }]
     });
