@@ -1,5 +1,6 @@
 // $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/bootstrap/";
 // bower:scss
+@import "font-awesome/scss/font-awesome.scss";
 // endbower
 
 .browsehappy {
@@ -93,6 +94,10 @@ body {
   max-width: 100%;
   display: inline-block;
   vertical-align: top;
+}
+
+.btn-blog-view {
+  color: #fff !important;
 }
 
 @media (max-width: 575px) {

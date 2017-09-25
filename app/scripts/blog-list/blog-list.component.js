@@ -10,12 +10,24 @@ angular.module('blogList')
                 $scope.query = q;
                 $scope.searchQuery = true;
             }
-
+            if ($scope.pagination === undefined && $rootScope.pagination === undefined) {
+              $scope.pagination = {
+                currentPage: 1
+              };
+              $rootScope.pagination = {
+                currentPage: 1
+              };
+            } else {
+              $scope.pagination = {
+                currentPage: $rootScope.pagination.currentPage
+              };
+            }
             $scope.order = '-publishDate';
             $scope.goToItem = function(post) {
-                $rootScope.$apply(function() {
-                    $location.path('/blog/' + post.id);
-                });
+                //$rootScope.$apply(function() {
+                $rootScope.pagination.currentPage = $scope.pagination.currentPage;
+                $location.path('/blog/' + post.id);
+                //});
             };
             $scope.changeCols = function(number) {
                 if (angular.isNumber(number)) {
@@ -28,18 +40,18 @@ angular.module('blogList')
             $scope.loadingQuery = false;
 
             $scope.$watch(function(){
-                if ($scope.query) {
-                    $scope.loadingQuery = true;
-                    $scope.cssClass = 'col-md-12';
-                    if ($scope.query !== q) {
-                        $scope.searchQuery = false;
-                    }
-                } else {
-                    if ($scope.loadingQuery) {
-                        setupCols($scope.items, 2);
-                        $scope.loadingQuery = false;
-                    }
-                }
+              if ($scope.query) {
+                  $scope.loadingQuery = true;
+                  $scope.cssClass = 'col-md-12';
+                  if ($scope.query !== q) {
+                      $scope.searchQuery = false;
+                  }
+              } else {
+                  if ($scope.loadingQuery) {
+                      setupCols($scope.items, 2);
+                      $scope.loadingQuery = false;
+                  }
+              }
             });
             Post.query(function(data) {
                 setupCols(data, 2);
