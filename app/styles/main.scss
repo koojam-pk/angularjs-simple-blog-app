@@ -100,6 +100,13 @@ body {
   color: #fff !important;
 }
 
+.photo-link:hover {
+  cursor: pointer;
+}
+.page-link {
+  padding: 6px;
+  font-size: 0.75em;
+}
 @media (max-width: 575px) {
   body, .btn {
       font-size: 0.8em !important;
